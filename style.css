@@ -1,0 +1,668 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+}
+
+header {
+    background: #1e1e1e;
+    padding: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    background: url('your-image.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: linear-gradient(180deg, #ff0000, #00ffff, #ffffff);
+    z-index: -1;
+}
+
+.hero::before {
+    left: 0;
+}
+
+.hero::after {
+    right: 0;
+}
+
+/* Efecto neón animado */
+.hero-content h1 {
+    font-size: 3rem;
+    margin: 0;
+    text-shadow:
+        0 0 10px #00f7ff,
+        0 0 20px #00f7ff,
+        0 0 35px #ff00ff;
+    color: white;
+}
+
+.about {
+    width: 100%;
+    min-height: 420px;
+    background-image: linear-gradient(
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.85)
+    ), url('1001301289.png'); /* ← tu imagen 1 */
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.about-content {
+    max-width: 800px;
+    color: #fff;
+}
+
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow:
+        0 0 8px #00f7ff,
+        0 0 18px #00f7ff,
+        0 0 30px #ff00ff;
+}
+
+.about-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+/* Sección de Cortes */
+.gallery {
+    padding: 50px 20px;
+    margin-top: 40px;  /* Añadir espacio encima */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.barber-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.barber {
+    text-align: center;
+}
+
+.barber-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+
+     box-shadow:
+        0 0 10px #00f7ff,
+        0 0 20px #ff00ff;
+}
+
+.contact-btn {
+    background-color: #25d366;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.socials {
+    display: block;
+    opacity: 1;
+}
+
+footer {
+    background-color: #1e1e1e;
+    text-align: center;
+    padding: 10px;
+}
+/* Animaciones al hacer scroll */
+.hidden {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: all 0.8s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Efecto neón animado */
+.hero-content h1,
+h2 {
+    text-shadow:
+        0 0 8px #00f7ff,
+        0 0 18px #00f7ff,
+        0 0 35px #ff00ff;
+}
+
+.neon-active {
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 20px #00f7ff,
+        0 0 40px #00f7ff,
+        0 0 70px #ff00ff;
+}
+
+/* Efectos en botones */
+.contact-btn {
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 0 10px #25d366,
+        0 0 20px #25d366;
+    transition: 0.3s ease;
+}
+
+.contact-btn:hover {
+    transform: scale(1.08);
+    box-shadow:
+        0 0 15px #25d366,
+        0 0 35px #25d366,
+        0 0 60px #25d366;
+}
+
+/* Botón flotante WhatsApp */
+.whatsapp-float {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 62px;
+    height: 62px;
+    background: #25d366;
+    color: white;
+    border-radius: 50%;
+    font-size: 30px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    box-shadow:
+        0 0 15px #25d366,
+        0 0 35px #25d366;
+    animation: pulseWhatsapp 1.6s infinite;
+}
+
+@keyframes pulseWhatsapp {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #25d366;
+    }
+
+    50% {
+        transform: scale(1.12);
+        box-shadow:
+            0 0 20px #25d366,
+            0 0 45px #25d366;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #25d366;
+    }
+}
+
+/* Botón flotante subir arriba */
+.top-float {
+    position: fixed;
+    right: 22px;
+    bottom: 95px;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: #00f7ff;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+    box-shadow:
+        0 0 12px #00f7ff,
+        0 0 30px #00f7ff;
+    transition: 0.3s ease;
+}
+
+.top-float.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.top-float:hover {
+    transform: scale(1.12);
+    background: #ff00ff;
+    color: white;
+    box-shadow:
+        0 0 15px #ff00ff,
+        0 0 35px #ff00ff;
+}
+
+/* Cards con efecto neón */
+.gallery-item,
+.barber {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(0, 247, 255, 0.25);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 0 18px rgba(0, 247, 255, 0.12);
+    transition: 0.35s ease;
+}
+
+.gallery-item:hover,
+.barber:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #ff00ff;
+    box-shadow:
+        0 0 18px #00f7ff,
+        0 0 35px rgba(255, 0, 255, 0.45);
+}
+
+/* Imagen con efecto profesional */
+.gallery-item img,
+.barber-photo {
+    transition: 0.35s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.15) contrast(1.1);
+}
+
+/* Navbar neón */
+nav ul li a {
+    transition: 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #00f7ff;
+    text-shadow:
+        0 0 8px #00f7ff,
+        0 0 18px #00f7ff;
+}
+/* Sección de Ubicación */
+.map {
+    padding: 50px 20px;
+    margin-top: 40px;  /* Añadir espacio encima */
+}
+/* Estilo para la sección Peluquería - Salón Claudette */
+.salon {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+
+    background: url('a_polished_salon_style_collage_image_advertisement.png') center/cover no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    color: #fff;
+    overflow: hidden;
+}
+
+.salon-content {
+    max-width: 900px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);  /* Fondo oscuro con un toque de transparencia */
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.salon h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px #00f7ff, 0 0 18px #00f7ff;
+}
+
+.salon p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 0 0 8px #ff00ff, 0 0 18px #ff00ff;
+}
+
+.info-salon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    padding: 80px 10%;
+    background: #0b0b0b;
+    color: #fff;
+
+    flex-wrap: wrap;
+}
+
+/* TEXTO */
+.info-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.info-text h2 {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centra TODO incluyendo el botón */
+}
+
+.info-text p {
+    color: #cccccc;
+    text-shadow: none;
+}
+/* BOTÓN NEON */
+.btn-neon {
+    display: inline-block;
+    padding: 12px 25px;
+
+    background: #ffffff;
+    color: #000;
+
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+
+    border: none;
+    box-shadow: none;
+
+    transition: 0.3s;
+}
+.btn-neon:hover {
+    background: #eaeaea;
+    transform: translateY(-2px);
+}
+
+/* IMAGEN */
+.info-img {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.info-img img {
+    width: 100%;
+    max-width: 500px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 0 20px #00f7ff,
+        0 0 40px #ff00ff;
+
+    transition: 0.3s;
+}
+
+.info-img img:hover {
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .info-salon {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Scroll reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: 0.9s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax */
+.info-img img {
+    will-change: transform;
+}
+
+/* Hover con brillo animado */
+.info-img img,
+.gallery-item,
+.barber,
+.info-salon {
+    position: relative;
+    overflow: hidden;
+}
+
+.info-img img:hover,
+.gallery-item:hover,
+.barber:hover {
+    filter: brightness(1.15) contrast(1.1);
+    box-shadow:
+        0 0 20px #00f7ff,
+        0 0 45px #ff00ff,
+        0 0 70px rgba(255, 255, 255, 0.35);
+}
+
+/* Líneas tipo barbería animadas */
+.barber-lines {
+    width: 100%;
+    height: 8px;
+    background: repeating-linear-gradient(
+        90deg,
+        #ff0000 0 35px,
+        #ffffff 35px 70px,
+        #007bff 70px 105px
+    );
+    background-size: 220px 100%;
+    animation: barberMove 2s linear infinite;
+    box-shadow:
+        0 0 12px #00f7ff,
+        0 0 25px #ff0033;
+}
+
+@keyframes barberMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 220px 0;
+    }
+}
+
+.socials {
+    position: relative;
+    z-index: 10;
+}
+
+.instagram-section {
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+    background: #0b0b0b;
+}
+
+.instagram-btn {
+    display: inline-block;
+    padding: 12px 25px;
+
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+    color: #fff;
+
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.instagram-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+}
+
+.game-link {
+    color: #00aaff;
+    font-weight: bold;
+    text-decoration: none;
+    position: relative;
+    padding: 5px 10px;
+    transition: 0.3s;
+}
+
+.game-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px #00aaff;
+}
+
+.juega-gana {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 80px 10%;
+    background: #0b0b0b;
+    color: #fff;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+
+.juega-img {
+    flex: 1;
+    max-width: 60%;
+}
+
+.juega-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid #ffffff;
+}
+
+.juega-text {
+    flex: 1;
+    max-width: 35%;
+}
+
+.juega-text h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.juega-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #dcdcdc;
+    margin-bottom: 25px;
+}
+
+.juega-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #007bff;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.juega-btn:hover {
+    background: #005fcc;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .juega-gana {
+        text-align: center;
+        padding: 60px 20px;
+        flex-direction: column;
+    }
+
+    .juega-img {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .juega-text h3 {
+        font-size: 2.2rem;
+    }
+}

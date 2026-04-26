@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDA Dash Game</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.game-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(circle at top, rgba(0, 140, 255, 0.25), transparent 35%),
+        radial-gradient(circle at bottom, rgba(255, 0, 0, 0.25), transparent 35%),
+        #050505;
+}
+
+.game-box {
+    width: 95%;
+    max-width: 900px;
+    height: 500px;
+    border: 4px solid white;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #07111f, #020202);
+    box-shadow:
+        0 0 20px #007bff,
+        0 0 35px #ff0000;
+}
+
+.score {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.player {
+    width: 45px;
+    height: 45px;
+    background: white;
+    position: absolute;
+    left: 80px;
+    bottom: 80px;
+    border: 3px solid #00aaff;
+    box-shadow:
+        0 0 15px #00aaff,
+        0 0 25px #ff0000;
+    transform: rotate(45deg);
+}
+
+.ground {
+    position: absolute;
+    bottom: 70px;
+    width: 100%;
+    height: 5px;
+    background: repeating-linear-gradient(
+        90deg,
+        red 0 40px,
+        white 40px 80px,
+        #007bff 80px 120px
+    );
+    animation: moveLines 1s linear infinite;
+}
+
+@keyframes moveLines {
+    from { background-position: 0; }
+    to { background-position: -120px; }
+}
+
+.obstacle {
+    position: absolute;
+    bottom: 75px;
+    width: 0;
+    height: 0;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 55px solid red;
+    filter: drop-shadow(0 0 10px red);
+}
+
+.jump-btn {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 18px 45px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, red, white, #007bff);
+    color: #000;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    padding: 20px;
+}
+
+.modal-content {
+    background: #0b0b0b;
+    border: 2px solid white;
+    padding: 30px;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    border-radius: 18px;
+    box-shadow:
+        0 0 20px #007bff,
+        0 0 35px red;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: white;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: none;
+}
+
+button,
+.submit-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.restart-btn {
+    background: red;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game-wrapper">
+    <div class="game-box" id="gameBox">
+        <div class="score">Puntos: <span id="score">0</span></div>
+        <div class="player" id="player"></div>
+        <div class="ground"></div>
+    </div>
+</div>
+
+<button class="jump-btn" id="jumpBtn">SALTAR</button>
+
+<div class="modal" id="resultModal">
+    <div class="modal-content">
+        <h2 id="resultTitle"></h2>
+        <p id="resultMessage"></p>
+
+        <form id="winnerForm" action="https://formsubmit.co/danielalvarad710@gmail.com" method="POST" class="hidden">
+            <input type="text" name="Nombre" placeholder="Nombre" required>
+            <input type="text" name="Apellido" placeholder="Apellido" required>
+            <input type="text" name="Cedula" placeholder="Número de cédula" required>
+
+            <input type="hidden" name="Puntos obtenidos" id="formScore">
+            <input type="hidden" name="Objetivo logrado" id="formGoal">
+
+            <input type="hidden" name="_subject" value="Nuevo participante - RDA Dash">
+            <input type="hidden" name="_captcha" value="false">
+
+            <button type="submit" class="submit-btn">Enviar datos</button>
+        </form>
+
+        <button class="restart-btn" onclick="restartGame()">Reiniciar</button>
+    </div>
+</div>
+
+<script>
+const player = document.getElementById("player");
+const gameBox = document.getElementById("gameBox");
+const scoreText = document.getElementById("score");
+const jumpBtn = document.getElementById("jumpBtn");
+
+const modal = document.getElementById("resultModal");
+const resultTitle = document.getElementById("resultTitle");
+const resultMessage = document.getElementById("resultMessage");
+const winnerForm = document.getElementById("winnerForm");
+const formScore = document.getElementById("formScore");
+const formGoal = document.getElementById("formGoal");
+
+let playerBottom = 80;
+let velocity = 0;
+let gravity = 0.8;
+let isJumping = false;
+let score = 0;
+let gameOver = false;
+let obstacles = [];
+let speed = 6;
+
+function jump() {
+    if (!isJumping && !gameOver) {
+        velocity = 15;
+        isJumping = true;
+        playJumpSound();
+    }
+}
+
+jumpBtn.addEventListener("click", jump);
+
+function updatePlayer() {
+    velocity -= gravity;
+    playerBottom += velocity;
+
+    if (playerBottom <= 80) {
+        playerBottom = 80;
+        velocity = 0;
+        isJumping = false;
+    }
+
+    player.style.bottom = playerBottom + "px";
+}
+
+function createObstacle() {
+    if (gameOver) return;
+
+    const obstacle = document.createElement("div");
+    obstacle.classList.add("obstacle");
+
+    let startX = gameBox.offsetWidth + 50;
+    obstacle.style.left = startX + "px";
+
+    gameBox.appendChild(obstacle);
+
+    obstacles.push({
+        element: obstacle,
+        x: startX
+    });
+}
+
+function updateObstacles() {
+    obstacles.forEach((obs, index) => {
+        obs.x -= speed;
+        obs.element.style.left = obs.x + "px";
+
+        if (obs.x < -60) {
+            obs.element.remove();
+            obstacles.splice(index, 1);
+        }
+
+        checkCollision(obs.element);
+    });
+}
+
+function checkCollision(obstacle) {
+    const playerRect = player.getBoundingClientRect();
+    const obstacleRect = obstacle.getBoundingClientRect();
+
+    if (
+        playerRect.left < obstacleRect.right &&
+        playerRect.right > obstacleRect.left &&
+        playerRect.bottom > obstacleRect.top &&
+        playerRect.top < obstacleRect.bottom
+    ) {
+        endGame();
+    }
+}
+
+function updateScore() {
+    score++;
+    scoreText.textContent = score;
+
+    if (score % 700 === 0) {
+        speed += 0.5;
+    }
+
+    if (score >= 4000) {
+        winDiscount();
+    }
+}
+
+function gameLoop() {
+    if (gameOver) return;
+
+    updatePlayer();
+    updateObstacles();
+    updateScore();
+
+    requestAnimationFrame(gameLoop);
+}
+
+let obstacleInterval = setInterval(() => {
+    if (!gameOver) createObstacle();
+}, 1400);
+
+function endGame() {
+    gameOver = true;
+    stopMusic();
+
+    formScore.value = score;
+
+    if (score >= 5000) {
+        formGoal.value = "Ganó descuento de -1$";
+        resultTitle.textContent = "¡FELICIDADES!";
+        resultMessage.textContent = "LOGRASTE UN CORTE DE CABELLO CON DESCUENTO DE -1$";
+        winnerForm.classList.remove("hidden");
+    } else if (score >= 3000) {
+        formGoal.value = "Participa por corte gratis";
+        resultTitle.textContent = "¡Buen trabajo!";
+        resultMessage.textContent = "Lograste participar en el sorteo para un corte de cabello gratis. Participas por 1 corte gratis los días 21 y 28 de cada mes.";
+        winnerForm.classList.remove("hidden");
+    } else {
+        formGoal.value = "Derrota sin premio";
+        resultTitle.textContent = "Derrota";
+        resultMessage.textContent = "No alcanzaste los puntos necesarios. Inténtalo de nuevo.";
+        winnerForm.classList.add("hidden");
+    }
+
+    modal.style.display = "flex";
+}
+
+function winDiscount() {
+    gameOver = true;
+    stopMusic();
+
+    formScore.value = score;
+    formGoal.value = "Ganó descuento de -1$";
+
+    resultTitle.textContent = "¡FELICIDADES!";
+    resultMessage.textContent = "LOGRASTE UN CORTE DE CABELLO CON DESCUENTO DE -1$";
+    winnerForm.classList.remove("hidden");
+
+    modal.style.display = "flex";
+}
+
+function restartGame() {
+    location.reload();
+}
+
+/* Música 8-bit generada con JavaScript */
+let audioCtx;
+let musicInterval;
+
+function startMusic() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const notes = [261, 329, 392, 523, 392, 329];
+    let i = 0;
+
+    musicInterval = setInterval(() => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = "square";
+        osc.frequency.value = notes[i % notes.length];
+
+        gain.gain.value = 0.04;
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.12);
+
+        i++;
+    }, 180);
+}
+
+function stopMusic() {
+    clearInterval(musicInterval);
+}
+
+function playJumpSound() {
+    if (!audioCtx) return;
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "square";
+    osc.frequency.value = 600;
+    gain.gain.value = 0.06;
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.08);
+}
+
+/* Iniciar música con primer toque */
+document.addEventListener("click", () => {
+    if (!audioCtx) startMusic();
+}, { once: true });
+
+gameLoop();
+</script>
+
+</body>
+</html>
