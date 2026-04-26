@@ -666,3 +666,105 @@ nav ul li a:hover {
         font-size: 2.2rem;
     }
 }
+
+/* RESPONSIVE GENERAL */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px 0;
+    }
+
+    nav ul li {
+        margin: 5px 0;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
+    }
+
+    .hero {
+        min-height: 360px;
+        background-size: cover;
+        background-position: center;
+        padding: 80px 15px;
+    }
+
+    .about {
+        min-height: 360px;
+        padding: 50px 18px;
+    }
+
+    .about-content h2,
+    .salon h2,
+    .juega-text h2,
+    .info-text h2 {
+        font-size: 2rem;
+    }
+
+    .about-content p,
+    .salon p,
+    .juega-text p,
+    .info-text p {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .gallery-container {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img {
+        height: 280px;
+        object-fit: cover;
+    }
+
+    .barber-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .info-salon,
+    .juega-gana {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .info-img img {
+        max-width: 100%;
+    }
+
+    .juega-img {
+        max-width: 100%;
+    }
+
+    .juega-img img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .map iframe {
+        height: 300px;
+    }
+
+    .instagram-btn,
+    .btn-neon,
+    .juega-btn,
+    .contact-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    footer {
+        font-size: 0.9rem;
+        padding: 20px;
+    }
+}
