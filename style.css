@@ -804,3 +804,25 @@ nav ul li a:hover {
         display: block;
     }
 }
+
+/* Estilo para las imágenes de la galería (Nuestros Cortes) */
+.nuestros-cortes .gallery-item {
+    width: 100%;
+    max-width: 350px; /* Maximo tamaño de la imagen en pantallas grandes */
+    margin: 0 auto; /* Centrar imágenes en pantallas pequeñas */
+}
+
+.nuestros-cortes .gallery-item img {
+    width: 100%; /* Hace que la imagen ocupe el 100% del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    object-fit: cover; /* Asegura que la imagen no se deforme, cubriendo el contenedor */
+    border-radius: 10px;
+}
+
+/* Asegurar que se vean bien en pantallas pequeñas */
+@media (max-width: 768px) {
+    .nuestros-cortes .gallery-item {
+        max-width: 100%; /* Permite que la imagen ocupe todo el espacio disponible */
+        padding: 10px; /* Un poco de espacio alrededor */
+    }
+}
