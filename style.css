@@ -31,46 +31,70 @@ nav ul li a {
     font-size: 1.2rem;
 }
 
+/* Sección Hero */
 .hero {
     position: relative;
     width: 100%;
     min-height: 560px;
-    background: url('your-image.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
-}
-
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 10px;
-    background: linear-gradient(180deg, #ff0000, #00ffff, #ffffff);
-    z-index: -1;
-}
-
-.hero::before {
-    left: 0;
-}
-
-.hero::after {
-    right: 0;
-}
-
-/* Efecto neón animado */
-.hero-content h1 {
-    font-size: 3rem;
-    margin: 0;
-    text-shadow:
-        0 0 10px #00f7ff,
-        0 0 20px #00f7ff,
-        0 0 35px #ff00ff;
     color: white;
+    overflow: hidden; /* Esto asegura que nada salga del área visible */
+}
+
+/* Contenedor de la imagen */
+.hero-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Habilita el desplazamiento horizontal */
+    -webkit-overflow-scrolling: touch; /* Desplazamiento táctil suave para dispositivos móviles */
+    display: flex;
+    justify-content: flex-start; /* Inicia desde el lado izquierdo */
+    padding: 10px; /* Espacio para evitar que la imagen toque los bordes */
+}
+
+.hero-image {
+    min-width: 100%; /* Asegura que la imagen ocupe el 100% del contenedor */
+    height: auto;  /* Mantiene la proporción de la imagen */
+    object-fit: cover;  /* Asegura que la imagen cubra el contenedor sin deformarse */
+    transition: transform 0.3s ease;  /* Transición suave en el desplazamiento */
+}
+
+/* Estilo para el contenido del Hero (Texto) */
+.hero-content {
+    position: absolute;
+    z-index: 10; /* Asegura que el contenido esté sobre la imagen */
+    color: white;
+    text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff, 0 0 35px #ff00ff;
+    padding: 20px;
+    width: 100%;
+    max-width: 90%;  /* Asegura que el contenido no ocupe más de 90% del ancho */
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 768px) {
+    .hero-wrapper {
+        width: 100%;
+        padding: 0 15px; /* Añadimos un pequeño margen en dispositivos móviles */
+    }
+
+    .hero-content h1 {
+        font-size: 2rem; /* Ajustamos el tamaño del texto */
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-wrapper {
+        width: 100%;
+    }
+
+    .hero-image {
+        min-width: 100%;
+        max-width: 100%; /* Evita que la imagen se desborde */
+    }
 }
 
 .about {
@@ -825,4 +849,42 @@ nav ul li a:hover {
         max-width: 100%; /* Permite que la imagen ocupe todo el espacio disponible */
         padding: 10px; /* Un poco de espacio alrededor */
     }
+}
+
+@media (max-width: 768px) {
+
+    .juega-text {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
+    .juega-text h3 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .juega-text p {
+        text-align: justify; /* 🔥 esto arregla TODO */
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 100%;
+    }
+
+}
+
+.music-player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0b0b0b;
+    z-index: 999;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+}
+
+.music-player iframe {
+    width: 100%;
+    height: 100px;
+    border: none;
 }
