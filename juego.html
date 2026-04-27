@@ -196,20 +196,19 @@ button,
         <h2 id="resultTitle"></h2>
         <p id="resultMessage"></p>
 
-        <form id="winnerForm" action="https://formsubmit.co/danielalvad710@gmail.com" method="POST" class="hidden">
-            <input type="text" name="Nombre" placeholder="Nombre" required>
-            <input type="text" name="Apellido" placeholder="Apellido" required>
-            <input type="text" name="Cedula" placeholder="Número de cédula" required>
-
-            <input type="hidden" name="Puntos obtenidos" id="formScore">
-            <input type="hidden" name="Objetivo logrado" id="formGoal">
-
-            <input type="hidden" name="_subject" value="Nuevo participante - RDA Dash">
-            <input type="hidden" name="_captcha" value="false">
-
-            <button type="submit" class="submit-btn">Enviar datos</button>
-        </form>
-
+       <form id="winnerForm" action="https://formsubmit.co/danielalvad710@gmail.com" method="POST" class="hidden">
+    <input type="text" name="Nombre" placeholder="Nombre" required>
+    <input type="text" name="Apellido" placeholder="Apellido" required>
+    <input type="text" name="Cedula" placeholder="Número de cédula" required>
+    <input type="email" name="Email del Participante" placeholder="Correo electrónico" required> <!-- Correo del emisor -->
+    <input type="hidden" name="Puntos obtenidos" id="formScore">
+    <input type="hidden" name="Objetivo logrado" id="formGoal">
+    <input type="hidden" name="_subject" value="Nuevo participante - RDA Dash">
+    <input type="hidden" name="_captcha" value="false">
+    
+    <button type="submit" class="submit-btn">Enviar datos</button>
+</form>
+        
         <button class="restart-btn" onclick="restartGame()">Reiniciar</button>
     </div>
 </div>
