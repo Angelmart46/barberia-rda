@@ -391,8 +391,6 @@ nav ul li a:hover {
     background-size: cover; /* Asegura que la imagen cubra toda el área del fondo */
     background-position: center center; /* Centra la imagen para que no se corte */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
-    height: 600px; /* Puedes ajustar la altura según sea necesario */
-    max-height: 500px; /* Limita la altura máxima */
     background: url('a_polished_salon_style_collage_image_advertisement.png') center/cover no-repeat;
 
     display: flex;
@@ -458,6 +456,31 @@ nav ul li a:hover {
 .info-text p {
     color: #cccccc;
     text-shadow: none;
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 768px) {
+    .salon {
+        padding: 30px 10px;  /* Reduce el padding en móviles */
+        min-height: 350px;    /* Ajusta la altura para que se vea mejor en pantallas pequeñas */
+    }
+
+    .salon h2 {
+        font-size: 2.5rem; /* Ajusta el tamaño de la fuente para que se vea bien en móviles */
+    }
+
+    .salon p {
+        font-size: 1.5rem;  /* Ajusta el tamaño del texto */
+    }
+
+    .info-salon {
+        padding: 50px 10px;  /* Ajusta el padding en dispositivos móviles */
+    }
+
+    .info-text {
+        text-align: center;
+        margin-bottom: 20px;
+    }
 }
 /* BOTÓN NEON */
 .btn-neon {
