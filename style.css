@@ -403,7 +403,7 @@ nav ul li a:hover {
 }
 
 .salon-content {
-    max-width: 900px;
+    max-width: 800px;
     text-align: center;
     background: rgba(0, 0, 0, 0.8);  /* Fondo oscuro con un toque de transparencia */
     padding: 30px;
