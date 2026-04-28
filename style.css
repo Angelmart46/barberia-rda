@@ -405,8 +405,8 @@ nav ul li a:hover {
 .salon-content {
     max-width: 800px;
     text-align: center;
-    background: rgba(0, 0, 0, 0.8);  /* Fondo oscuro con un toque de transparencia */
-    padding: 30px;
+    background: rgba(0, 0, 0, 0.6);  /* Fondo oscuro con un toque de transparencia */
+    padding: 20px;
     border-radius: 8px;
 }
 
