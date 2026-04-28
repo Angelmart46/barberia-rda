@@ -388,7 +388,10 @@ nav ul li a:hover {
     position: relative;
     width: 100%;
     min-height: 500px;
-
+    min-width: 100%; /* Asegura que la imagen ocupe el 100% del contenedor */
+    height: auto;  /* Mantiene la proporción de la imagen */
+    object-fit: cover;  /* Asegura que la imagen cubra el contenedor sin deformarse */
+    transition: transform 0.3s ease;  /* Transición suave en el desplazamiento */
     background: url('a_polished_salon_style_collage_image_advertisement.png') center/cover no-repeat;
 
     display: flex;
